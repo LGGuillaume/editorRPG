@@ -1,0 +1,95 @@
+#include <iostream>
+#include <string>
+#include <conio.h>
+
+//enum Menu
+//{
+//    newGame,
+//    loadGame
+//};
+
+class Class
+{
+public:
+    std::string stuff;
+    virtual void show() = 0;
+};
+
+class Mage : public Class
+{
+private:
+    const int mana = 100;
+    std::string name = "Mage";
+public:
+    virtual void show()
+    {
+        std::cout << "Firebolt !";
+        std::cout << std::endl;
+        std::cout << "I have " << mana << " mana!";
+    }
+};
+
+class Warrior : public Class
+{
+private:
+    const int rage = 100;
+    std::string name = "Warrior";
+public:
+    virtual void show()
+    {
+        std::cout << "Strength and Honor";
+        std::cout << std::endl;
+        std::cout << "I have " << rage << " rage!";
+    }
+};
+
+class Rogue : public Class
+{
+private:
+    const int stamina = 100;
+    std::string name = "Rogue";
+public:
+    virtual void show()
+    {
+        std::cout << "Darkness is my friend";
+        std::cout << std::endl;
+        std::cout << "I have " << stamina << " stamina!";
+    }
+};
+
+Class* pickClass()
+{
+    std::string type;
+    std::cout << "Pick your class (Warrior, Rogue or Mage): ";
+    std::cout << std::endl;
+    type = _getch();
+    if (type == "m")
+        return new Mage{};
+    else if (type == "w")
+        return new Warrior{};
+    else if (type == "r")
+        return new Rogue{};
+    else
+        return 0;
+}
+
+void gameMenu()
+{
+    std::cout << "--- Welcome to the RPG character editor! ---\n";
+    std::cout << "--- Please, select an option ---\n";
+    std::cout << std::endl;
+    std::cout << "- New Game -";
+    std::cout << "\n- Exit -\n";
+    std::cout << std::endl;
+}
+
+int main()
+{
+    gameMenu();
+
+    Class* c = pickClass();
+    system("cls");
+    c->show();
+    std::cout << std::endl;
+    delete c;
+}
